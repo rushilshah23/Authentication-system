@@ -1,0 +1,84 @@
+# Ignore all node_modules directories at all levels
+**/node_modules/
+
+# Ignore all .env files at all levels
+**/.env
+
+
+# Dependency directories
+node_modules/
+
+#Build
+build/
+
+# Output of npm
+npm-debug.log
+
+# Environment file
+.env
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+test-db-log.*
+
+# Compiled binary addons
+build/Release
+
+# Output of node-gyp
+.gyp/
+.dirstamp
+.target
+.autotools
+
+# Optional npm cache directory
+.npm
+
+# Parcel
+.cache
+
+# Yarn
+.yarn-integrity
+
+# Debugging files
+node_inspect/
+
+# ESLint cache
+.eslintcache
+
+# Prettier
+.prettier*
+
+# TSLint
+tslint.json
+
+# Visual Studio Code folders
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Node.js PID file
+*.pid
+
+# Snapshots
+__snapshots__
+
+# Custom VS Code settings (modify to match your settings)
+.vscode/settings.json
+
+# Yarn 2
+.pnp.*
+
+# Jest Snapshot directory
+__image_snapshots__
