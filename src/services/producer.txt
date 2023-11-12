@@ -1,0 +1,34 @@
+// import { rabbitMQ } from "@/configs/rabbitmq.config";
+
+// // const amqp = require('amqplib')
+// import * as amqp from "amqplib";
+
+
+// // 1. Connect to rabbitmq Server
+// // 2. Create a new channel on the above connection
+// // 3. Create the exchange
+// // 4. Publish message to the exchange with the routing key
+
+// export class Producer{
+//     constructor(){}
+//  channel:amqp.Channel | undefined;
+//     async createChannel(){
+//         const connection = await amqp.connect(rabbitMQ.RABBITMQ_URL);
+//         this.channel = await connection.createChannel();
+//     }
+
+//     async publishMessage(routingKey:string, message:any){
+//         if(!this.channel){
+//             await this.createChannel();
+//         }
+//         await this.channel?.assertExchange(rabbitMQ.EXCHANGE_NAME,"direct");
+//         const authData  = {
+//             authType:routingKey,
+//             message:message,
+//             datetime:new Date()
+//         }
+//         await this.channel?.publish(rabbitMQ.EXCHANGE_NAME,routingKey,Buffer.from(JSON.stringify(authData)))
+//         console.log(`Message : ${authData} with routingKey ${routingKey} send  `)
+//     }
+
+// }
