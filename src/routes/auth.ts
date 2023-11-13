@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { authenticate, getAllUsers, localLogin, localRegister, logout, operate  } from "../controllers/auth.controller";
+import { authenticate, getAllUsers, localLogin, localRegister, logout  } from "../controllers/auth.controller";
 import { AuthRequest } from "../types/AuthRequest.Interface";
 
 const router = Router();
@@ -20,7 +20,6 @@ router.post("/local-signout",logout)
 
 router.get('/users',getAllUsers);
 
-router.post("/publish",operate);
 
 export {
     router as AuthRouter

@@ -127,6 +127,7 @@ export const logoutLogic = async ():Promise<ResponseInterface> => {
 
 export const authenticateLogic = async (accessToken:Cookies.ACCESSTOKEN,refreshToken:Cookies.REFRESHTOKEN) :Promise<ResponseInterface> => {
         console.log("Authenticated started")
+        console.log(accessToken,refreshToken);
         let res : ResponseInterface = {
             data:"",
             status:0

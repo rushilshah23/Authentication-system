@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { authService } from "@/lib/auth";
 import { Cookies } from "@/types/Cookies.enum";
-import RabbitMQClient from "@/services/client";
 import { ResponseInterface } from "@/types/Response.interface";
 import { authenticateLogic, getAllUsersLogic, localLoginLogic, localRegisterLogic } from "@/logic/auth.logic";
 
@@ -75,9 +74,3 @@ export const getAllUsers = async (req: Request, res: Response) => {
 }
 
 
-export const operate = async (req: Request, res: Response) => {
-    console.log("In the route producing message ...")
-    await RabbitMQClient.produce(req.body);
-    return res.status(200).json("Message produced")
-
-}

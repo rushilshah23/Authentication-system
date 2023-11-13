@@ -6,7 +6,8 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet"
 import bodyParser from "body-parser";
 import { CORS_OPTIONS } from "@/configs/cors.config";
-// import RabbitMQClient from "@/services/client";
+import rabbitMQServerMode from "@/services/server/rabbitMQServerMode";
+import rabbitMQClientMode from "@/services/client/rabbitMQClientMode"
 
 const app = express();
 const server_port = config.SERVER_PORT;
@@ -25,12 +26,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use("/auth", AuthRouter);
 app.use("/", AuthRouter);
 
+
+const initializeRabbitMQ = async () => {
+  await rabbitMQClientMode.initializeRabbitMQClient();
+  console.log("Rabbit MQ Client initialized")
+  await rabbitMQServerMode.initializeRabbitMQServer();
+  console.log("Rabbit MQ Server initialized")
+}
   
 const appServer = app.listen(server_port, async() => {
   console.log(`Authentication Server running at http://localhost:${server_port}`
   )
-  // await RabbitMQClient.initialize()
-  // console.log("Rabbit MQ Server initialized at http://localhost:15672")
+  await initializeRabbitMQ()
+  console.log("Rabbit MQ  initialized at http://localhost:15672")
 })
 
 
