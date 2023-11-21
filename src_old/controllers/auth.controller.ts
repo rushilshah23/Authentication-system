@@ -4,11 +4,13 @@ import { Cookies } from "@/types/Cookies.enum";
 import { ServiceResponseInterface } from "@/types/ServiceResponse.Interface";
 import {
   authenticateAccessVerifyLogic,
+  authenticateLogic,
   authenticateRefreshVerifyLogic,
   getAllUsersLogic,
   localLoginLogic,
   localRegisterLogic,
 } from "@/logic/auth.logic";
+import { request } from "http";
 import { HTTP_STATUS_CODES } from "@/configs/httpStatusCodes.config";
 
 export const localRegisterContoller  = async (req: Request, res: Response) => {
@@ -54,6 +56,24 @@ export const logoutContoller  = async (req: Request, res: Response) => {
   return res.status(200).json("User logged out successfully !");
 };
 
+// export const authenticateContoller  = async (req: Request, res: Response) => {
+//   const response: ServiceResponseInterface = await authenticateLogic(
+//     req.signedCookies[Cookies.ACCESSTOKEN],
+//     req.signedCookies[Cookies.REFRESHTOKEN]
+//   );
+
+//   if (response.status === 203) {
+//     await authService.setCookie(
+//       res,
+//       response.data.newTokens.accessToken,
+//       response.data.newTokens.refreshToken
+//     );
+//   } else if (response.status === 202) {
+//     await authService.setCookie(res, response.data.accessToken);
+//   }
+
+//   return res.status(response.status).json(response.data);
+// };
 
 export const getAllUsersContoller  = async (req: Request, res: Response) => {
   const response: ServiceResponseInterface = await getAllUsersLogic();

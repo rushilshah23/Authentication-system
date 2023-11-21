@@ -3,7 +3,6 @@ import {ProducerClient} from "./producerClient";
 import { rabbitMQConfig } from "@/configs/rabbitMQ.config";
 import EventEmitter from "events";
 import { ConsumerClient } from "./consumerClient";
-import { ServiceRequest } from "@/types/ServiceRequest.Interface";
 
  class RabbitMQClient{
     private connection!:Connection;
@@ -61,7 +60,7 @@ import { ServiceRequest } from "@/types/ServiceRequest.Interface";
         return this.rabbitMQInstance;
     }
 
-    async produceToServer(data:ServiceRequest,serverRequestQueue:string){
+    async produceToServer(data:any,serverRequestQueue:string){
         if(!this.connection){
             await this.initializeRabbitMQClient()
         }

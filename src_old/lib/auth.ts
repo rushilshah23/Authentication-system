@@ -11,7 +11,7 @@ import { UsersDB } from "@/models/users";
 class Auth {
 
   public authenticateHelper = async (accessToken?: string, refreshToken?: string) => {
-    if (!!!accessToken || !!!refreshToken) {
+    if (!accessToken || !refreshToken) {
       return null;
     }
 
