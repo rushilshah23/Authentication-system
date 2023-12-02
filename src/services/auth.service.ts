@@ -1,4 +1,5 @@
 import { HTTP_STATUS_CODES } from "@/configs/httpStatusCodes.config";
+import { defaultServiceResponseInterfaceValue } from "@/configs/microService.config";
 import { authService } from "@/lib/auth";
 import { UsersDB } from "@/models/users";
 import { Cookies } from "@/types/Cookies.enum";
@@ -11,10 +12,7 @@ const bcrypt = require('bcrypt');
 
 
 export const localRegisterLogic = async (localRegisterForm: LocalRegisterForm): Promise<ServiceResponseInterface> => {
-    let res: ServiceResponseInterface = {
-        data: undefined,
-        status: HTTP_STATUS_CODES.HTTP_500_INTERNAL_SERVER_ERROR
-    };
+    let res: ServiceResponseInterface = defaultServiceResponseInterfaceValue;
     const { emailId, password, confirmPassword } = localRegisterForm;
     if (!emailId || !password || !confirmPassword) {
 
@@ -60,10 +58,7 @@ export const localRegisterLogic = async (localRegisterForm: LocalRegisterForm): 
 
 
 export const localLoginLogic = async (localLoginForm: LocalLoginForm):Promise<ServiceResponseInterface> => {
-    let res: ServiceResponseInterface = {
-        data: "",
-        status: HTTP_STATUS_CODES.HTTP_500_INTERNAL_SERVER_ERROR
-    }
+    let res: ServiceResponseInterface = defaultServiceResponseInterfaceValue;
 
 
     if (!localLoginForm) {
@@ -118,7 +113,8 @@ export const localLoginLogic = async (localLoginForm: LocalLoginForm):Promise<Se
 
 
 export const logoutLogic = async ():Promise<ServiceResponseInterface> => {
-    let res:ServiceResponseInterface = {
+    let res:ServiceResponseInterface =defaultServiceResponseInterfaceValue;
+    res = {
         data:"Logged out ",
         status:HTTP_STATUS_CODES.HTTP_200_OK
     }
@@ -129,10 +125,7 @@ export const logoutLogic = async ():Promise<ServiceResponseInterface> => {
 export const  authenticateLogic = async (accessToken:Cookies.ACCESSTOKEN,refreshToken:Cookies.REFRESHTOKEN) :Promise<ServiceResponseInterface> => {
         console.log("Authenticated started")
         console.log(accessToken,refreshToken);
-        let res : ServiceResponseInterface = {
-            data:"",
-            status:HTTP_STATUS_CODES.HTTP_500_INTERNAL_SERVER_ERROR
-        }
+        let res : ServiceResponseInterface = defaultServiceResponseInterfaceValue;
         const accessTokenPayload = authService.verifyAccessToken(accessToken);
         
         if (accessTokenPayload) {
@@ -193,10 +186,7 @@ export const  authenticateLogic = async (accessToken:Cookies.ACCESSTOKEN,refresh
 
 
 export const getAllUsersLogic = async ():Promise<ServiceResponseInterface>  => {
-    let res : ServiceResponseInterface = {
-        data:"",
-        status:HTTP_STATUS_CODES.HTTP_500_INTERNAL_SERVER_ERROR
-    }
+    let res : ServiceResponseInterface = defaultServiceResponseInterfaceValue;
     const allUsersList = await UsersDB.getAllUsers();
     res = {
         data:{allUsersList},
@@ -209,10 +199,7 @@ export const getAllUsersLogic = async ():Promise<ServiceResponseInterface>  => {
 export const authenticateAccessVerifyLogic = async(accessToken:string):Promise<ServiceResponseInterface>  => {
     console.log("Access Token authentication started")
     console.log(accessToken);
-    let res : ServiceResponseInterface = {
-        data:"",
-        status:HTTP_STATUS_CODES.HTTP_500_INTERNAL_SERVER_ERROR
-    }
+    let res : ServiceResponseInterface = defaultServiceResponseInterfaceValue;
     const accessTokenPayload =  authService.verifyAccessToken(accessToken);
     
     if (!!accessTokenPayload) {
@@ -236,11 +223,8 @@ export const authenticateAccessVerifyLogic = async(accessToken:string):Promise<S
 
 export const authenticateRefreshVerifyLogic = async(refreshToken:string):Promise<ServiceResponseInterface>  => {
 
-    let res:ServiceResponseInterface = {
-        data:"",
-        status:HTTP_STATUS_CODES.HTTP_500_INTERNAL_SERVER_ERROR
-    }
-    const refreshTokenPayload = authService.verifyRefreshToken(refreshToken)
+    let res:ServiceResponseInterface = defaultServiceResponseInterfaceValue;
+    const refreshTokenPayload =  authService.verifyRefreshToken(refreshToken)
     console.log(refreshTokenPayload)
     if (refreshTokenPayload) {
         let user: UserInterface;

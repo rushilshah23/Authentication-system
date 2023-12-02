@@ -4,3 +4,4 @@ export interface ServiceResponseInterface {
     status:HTTP_STATUS_CODES;
     data:any;
 }
+

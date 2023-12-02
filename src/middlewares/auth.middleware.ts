@@ -1,5 +1,5 @@
 import { HTTP_STATUS_CODES } from "@/configs/httpStatusCodes.config";
-import { authenticateAccessVerifyLogic } from "@/logic/auth.logic";
+import { authenticateAccessVerifyLogic } from "@/services/auth.service";
 import { Cookies } from "@/types/Cookies.enum";
 import { ServiceResponseInterface } from "@/types/ServiceResponse.Interface";
 import { NextFunction, Request, Response } from "express";

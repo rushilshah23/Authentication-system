@@ -6,9 +6,10 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet"
 import bodyParser from "body-parser";
 import { CORS_OPTIONS } from "@/configs/cors.config";
-import rabbitMQServerMode from "@/services/server/rabbitMQServerMode";
-import rabbitMQClientMode from "@/services/client/rabbitMQClientMode"
+import rabbitMQServerMode from "@/microservices/rabbitMq/server/rabbitMQServerMode";
+import rabbitMQClientMode from "@/microservices/rabbitMq/client/rabbitMQClientMode"
 import mongoDBInstance from "@/models/mongo";
+import { AuthMicroServiceRouter } from "@/microservices/https/authHttps.router";
 
 const app = express();
 const server_port = config.SERVER_PORT;
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use("/auth", AuthRouter);
 app.use("/", AuthRouter);
-
+app.use("/ms",AuthMicroServiceRouter)
 
 const initializeRabbitMQ = async () => {
   try {
@@ -38,7 +39,7 @@ const initializeRabbitMQ = async () => {
   console.log("Rabbit MQ Server initialized")
   console.log("Rabbit MQ  initialized at http://localhost:15672");
 } catch (error) {
-    console.log("Error initializating RabbitMQ Module -",error);
+    console.log("Error initializating RabbitMQ Module -");
 }
 }
   

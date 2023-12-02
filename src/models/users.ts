@@ -104,8 +104,15 @@ import { v4 } from "uuid";
 
 class UsersDB {
     private static async getCollection() {
-        const dbConnection = await mongoDBInstance.getDB();
-        return dbConnection.collection("users");
+        const dbConnection = await mongoDBInstance.onlyGetDB();
+        if(dbConnection){
+            return dbConnection.collection("users");
+            
+        }else{
+            console.log("Error: DB not initialized")
+            throw Error("Db not initialized !")
+
+        }
     }
 
     static createUser = async (emailId: string, password: string) => {
@@ -131,6 +138,7 @@ class UsersDB {
     };
 
     static findOne = async (emailId: string) => {
+
         const usersCollection = await UsersDB.getCollection();
         const returnUser = await usersCollection.findOne({ emailId: emailId });
         return returnUser;

@@ -1,3 +1,4 @@
+import { ServiceRequestInterface } from "@/types/ServiceRequest.Interface";
 import { Channel } from "amqplib";
 import { randomUUID } from "crypto";
 import EventEmitter from "events";
@@ -5,7 +6,7 @@ import EventEmitter from "events";
 export  class ProducerClient{
     constructor(private channel:Channel, private replyClientQueueName:string, private eventEmitter:EventEmitter){};
     
-    async produceMessageToServer(data:any,requestServerQueue:string){
+    async produceMessageToServer(data:ServiceRequestInterface,requestServerQueue:string){
         const uuid = randomUUID();
         console.log("Correlation ID for the mssg to bee sent is ",uuid);
         console.log("Message produced - ",data)

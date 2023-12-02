@@ -50,6 +50,14 @@ class MongoDBClient{
         }
         return this.instance;
     }
+    public  onlyGetDB = async():Promise<Db> => {
+        if(!this.dbInitialized){
+            throw Error("Cant connect to Database Try again later !")
+        }else{
+
+            return this.dbConnection
+        }
+    }
 
 }
 

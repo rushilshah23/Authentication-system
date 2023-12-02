@@ -8,10 +8,10 @@ import {
   getAllUsersLogic,
   localLoginLogic,
   localRegisterLogic,
-} from "@/logic/auth.logic";
+} from "@/services/auth.service";
 import { HTTP_STATUS_CODES } from "@/configs/httpStatusCodes.config";
 
-export const localRegisterContoller  = async (req: Request, res: Response) => {
+export const localRegisterController  = async (req: Request, res: Response) => {
   if (req.body.localRegisterForm) {
     const { emailId, password, confirmPassword } = req.body.localRegisterForm;
     if (!emailId || !password || !confirmPassword) {
@@ -26,7 +26,7 @@ export const localRegisterContoller  = async (req: Request, res: Response) => {
   }
 };
 
-export const localLoginContoller  = async (req: Request, res: Response) => {
+export const localLoginController  = async (req: Request, res: Response) => {
   if (!!!req.body.localLoginForm) {
     return res.status(400).json("Login Details missing !");
   }
@@ -43,7 +43,7 @@ export const localLoginContoller  = async (req: Request, res: Response) => {
   return res.status(response.status).json(response.data);
 };
 
-export const logoutContoller  = async (req: Request, res: Response) => {
+export const logoutController  = async (req: Request, res: Response) => {
   if (
     !req.signedCookies[Cookies.ACCESSTOKEN] &&
     !req.signedCookies[Cookies.REFRESHTOKEN]
@@ -55,12 +55,12 @@ export const logoutContoller  = async (req: Request, res: Response) => {
 };
 
 
-export const getAllUsersContoller  = async (req: Request, res: Response) => {
+export const getAllUsersController  = async (req: Request, res: Response) => {
   const response: ServiceResponseInterface = await getAllUsersLogic();
   return res.status(response.status).json(response.data);
 };
 
-export const authAccessContoller = async(request: Request, res: Response) => {
+export const authAccessController = async(request: Request, res: Response) => {
   let accessToken = request.signedCookies[Cookies.ACCESSTOKEN];
   if (!!!accessToken) {
     accessToken = ((request.header(Cookies.ACCESSTOKEN) as string) || "")
@@ -80,7 +80,7 @@ export const authAccessContoller = async(request: Request, res: Response) => {
     .json(accessTokenPayloadServiceResponse.data);
 };
 
-export const verifyRefreshTokenContoller = async (request: Request, res: Response) => {
+export const verifyRefreshTokenController = async (request: Request, res: Response) => {
   let refreshToken = request.signedCookies[Cookies.REFRESHTOKEN];
   if (!!!refreshToken) {
     refreshToken = ((request.header(Cookies.REFRESHTOKEN) as string) || "")
